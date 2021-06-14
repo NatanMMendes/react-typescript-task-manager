@@ -1,12 +1,11 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {FaCheckCircle, FaPlus, FaTimesCircle} from 'react-icons/fa';
+import {FaCheck,FaUndo, FaPlus, FaTimes} from 'react-icons/fa';
 
 const ModalContent = styled.div`
   background-color: rgb(255 255 255 / 80%);
   padding: 20px;
-  height: 50%;
   border: 1px solid #888;
   width: 50%;
   border-radius: 10px;
@@ -37,7 +36,7 @@ const InputForm = styled.input`
     width: 100%;
     font-size:18px;
     height: 40px;
-    padding: 0;
+    padding: 0 10px;
     ::placeholder {
       padding:10px;
 
@@ -76,7 +75,6 @@ const DivButtons = styled.div`
   border: none;
 
 `;
-
 
 const divider = styled.hr`
   background-color: black;
@@ -135,8 +133,10 @@ function App() {
                     <ItemContainer key={index}>
                       <span>{item.task}</span>
                       <DivButtons>
-                        <ButtonItem onClick={() => toogleStatusItem(index,true)}><FaCheckCircle/></ButtonItem>
-                        <ButtonItem onClick={() => removeItem(index)}><FaTimesCircle/></ButtonItem>
+                        <ButtonItem onClick={() => toogleStatusItem(index,true)}><FaCheck style={{ background: "#d6e4fd", padding: "5px" , borderRadius:"20px" }}/></ButtonItem>
+                        <ButtonItem onClick={() => removeItem(index)}>
+                          <FaTimes style={{ background: "#d6e4fd", padding: "5px" , borderRadius:"20px" }}/>
+                        </ButtonItem>
                       </DivButtons>
                     </ItemContainer>
                   )
@@ -149,9 +149,9 @@ function App() {
               {list.map((item, index) => {
                 if(item.finished){
                   return (
-                    <ItemContainer key={index}>
+                    <ItemContainer style={{ backgroundColor:"#3a7bd5" , color:"white"}} key={index}>
                       <span>{item.task}</span>
-                      <ButtonItem onClick={() => toogleStatusItem(index,false)}><FaCheckCircle/></ButtonItem>
+                      <ButtonItem onClick={() => toogleStatusItem(index,false)}><FaTimes/></ButtonItem>
                     </ItemContainer>
                   )
                 }
