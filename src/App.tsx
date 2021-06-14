@@ -4,13 +4,51 @@ import styled from 'styled-components';
 import {FaCheckCircle, FaPlus, FaTimesCircle} from 'react-icons/fa';
 
 const ModalContent = styled.div`
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  background-color: rgb(255 255 255 / 80%);
   padding: 20px;
+  height: 50%;
   border: 1px solid #888;
-  width: 50%; /* Could be more or less, depending on screen size */
+  width: 50%;
   border-radius: 10px;
+`;
 
+const ItemContainer = styled.li`
+    list-style-type: none;
+    padding: 10px;
+    background-color: white;
+    margin: 20px 0;
+    display:flex;
+    color: #387fd0;
+    justify-content: space-between;
+`;
+
+const ListContainer =styled.ul`
+  padding: 0;
+  margin: 20px 0;
+`;
+
+const Form = styled.form`
+  display: flex;
+  border: 3px solid #387fd0;
+  border-radius: 5px;
+`;
+
+const InputForm = styled.input`
+    width: 100%;
+    font-size:18px;
+    height: 40px;
+    padding: 0;
+    ::placeholder {
+      padding:10px;
+
+   }
+`;
+
+const ButtonItem = styled.button`
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #3a7bd5;
 `;
 
 const ModalConteiner = styled.div`
@@ -19,9 +57,29 @@ const ModalConteiner = styled.div`
   left: 0;
   top: 0;
   width: 100%; 
+  display:flex;
+  justify-content:center;
+  align-items:center;
   height: 100%;
   overflow: auto; 
   background-image: linear-gradient(to right, #3980d7 , #39cefc);
+`;
+
+const ButtonForm = styled.button`
+	background-color: #387fd0;
+  border: none;
+  width: 60px;
+  float:right;
+`;
+
+const DivButtons = styled.div`
+  border: none;
+
+`;
+
+
+const divider = styled.hr`
+  background-color: black;
 `;
 
 const defaultList = [
@@ -50,7 +108,7 @@ function App() {
     return (
       <ModalConteiner>
         <ModalContent>
-            <form
+            <Form
                 onSubmit={event => {
                     event.preventDefault();
                     const listItem = {task: item, finished: false};
@@ -60,7 +118,7 @@ function App() {
                     }
                 }}
             >
-                <input
+                <InputForm
                     type="text"
                     value={item}
                     placeholder="Add a task here..."
@@ -68,35 +126,38 @@ function App() {
                         event => setItem(event.target.value)
                     }
                 />
-                <button type="submit"><FaPlus/></button>
-            </form>
-            <ul>
+                <ButtonForm type="submit"><FaPlus style={{ color: "white", fontSize: "24px" }}/></ButtonForm>
+            </Form>
+            <ListContainer>
               {list.map((item, index) => {
                 if(!item.finished){
                   return (
-                    <li key={index}>
+                    <ItemContainer key={index}>
                       <span>{item.task}</span>
-                      <button onClick={() => toogleStatusItem(index,true)}><FaCheckCircle/></button>
-                      <button onClick={() => removeItem(index)}><FaTimesCircle/></button>
-                    </li>
+                      <DivButtons>
+                        <ButtonItem onClick={() => toogleStatusItem(index,true)}><FaCheckCircle/></ButtonItem>
+                        <ButtonItem onClick={() => removeItem(index)}><FaTimesCircle/></ButtonItem>
+                      </DivButtons>
+                    </ItemContainer>
                   )
                 }
                 return null
               })}
-            </ul>
-            <ul>
+            </ListContainer>
+            <hr></hr>
+            <ListContainer>
               {list.map((item, index) => {
                 if(item.finished){
                   return (
-                    <li key={index}>
+                    <ItemContainer key={index}>
                       <span>{item.task}</span>
-                      <button onClick={() => toogleStatusItem(index,false)}><FaCheckCircle/></button>
-                    </li>
+                      <ButtonItem onClick={() => toogleStatusItem(index,false)}><FaCheckCircle/></ButtonItem>
+                    </ItemContainer>
                   )
                 }
                 return null
               })}
-            </ul>
+            </ListContainer>
         </ModalContent>
       </ModalConteiner>
     );
