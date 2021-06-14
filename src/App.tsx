@@ -1,12 +1,12 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {FaCheck,FaUndo, FaPlus, FaTimes} from 'react-icons/fa';
+import {FaCheck, FaPlus, FaTimes} from 'react-icons/fa';
 
 const ModalContent = styled.div`
   background-color: rgb(255 255 255 / 80%);
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid transparent;
   width: 50%;
   border-radius: 10px;
 `;
@@ -38,7 +38,7 @@ const InputForm = styled.input`
     height: 40px;
     padding: 0 10px;
     ::placeholder {
-      padding:10px;
+      padding:5px;
 
    }
 `;
@@ -48,6 +48,8 @@ const ButtonItem = styled.button`
     border: none;
     font-size: 24px;
     color: #3a7bd5;
+    display: inline-flex;
+    align-items: center;
 `;
 
 const ModalConteiner = styled.div`
@@ -74,10 +76,6 @@ const ButtonForm = styled.button`
 const DivButtons = styled.div`
   border: none;
 
-`;
-
-const divider = styled.hr`
-  background-color: black;
 `;
 
 const defaultList = [
@@ -126,12 +124,12 @@ function App() {
                 />
                 <ButtonForm type="submit"><FaPlus style={{ color: "white", fontSize: "24px" }}/></ButtonForm>
             </Form>
-            <ListContainer>
+            <ListContainer style={{borderBottom:"2px solid rgb(58, 123, 213, .2)"}}>
               {list.map((item, index) => {
                 if(!item.finished){
                   return (
                     <ItemContainer key={index}>
-                      <span>{item.task}</span>
+                      <span style={{ display:"flex" , alignItems:"center" , fontWeight:500}}>{item.task}</span>
                       <DivButtons>
                         <ButtonItem onClick={() => toogleStatusItem(index,true)}><FaCheck style={{ background: "#d6e4fd", padding: "5px" , borderRadius:"20px" }}/></ButtonItem>
                         <ButtonItem onClick={() => removeItem(index)}>
@@ -144,14 +142,13 @@ function App() {
                 return null
               })}
             </ListContainer>
-            <hr></hr>
             <ListContainer>
               {list.map((item, index) => {
                 if(item.finished){
                   return (
-                    <ItemContainer style={{ backgroundColor:"#3a7bd5" , color:"white"}} key={index}>
-                      <span>{item.task}</span>
-                      <ButtonItem onClick={() => toogleStatusItem(index,false)}><FaTimes/></ButtonItem>
+                    <ItemContainer style={{ backgroundColor:"#3a7bd5" , color:"white", fontWeight:500}} key={index}>
+                      <span style={{ display:"flex" , alignItems:"center"}}>{item.task}</span>
+                      <ButtonItem onClick={() => toogleStatusItem(index,false)}><FaCheck style={{ background: "white", padding: "5px" , borderRadius:"20px" }}/></ButtonItem>
                     </ItemContainer>
                   )
                 }
