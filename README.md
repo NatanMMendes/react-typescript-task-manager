@@ -12,7 +12,7 @@ Repositório de Treinamento de ReactJS e TypeScript para o Onboarding
 - Para estilização StyledComponents e React Icons
 
 ## Funcionamento:
-- Pagina unica com modal contendo:
+Pagina unica com modal contendo:
 + Input e button para inserir uma nova tarefa;
 + Uma lista de Tarefas criadas com opção de Excluir e Finalizar Tarefas;
 + Outra lista com as Tarefas Finalizadas com a opção Reabrir Tarefas;
