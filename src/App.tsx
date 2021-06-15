@@ -13,12 +13,13 @@ const ModalContent = styled.div`
 
 const ItemContainer = styled.li`
     list-style-type: none;
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
     background-color: white;
     margin: 20px 0;
     display:flex;
     color: #387fd0;
     justify-content: space-between;
+    border-radius: 5px;
 `;
 
 const ListContainer =styled.ul`
@@ -35,11 +36,11 @@ const Form = styled.form`
 const InputForm = styled.input`
     width: 100%;
     font-size:18px;
-    height: 40px;
-    padding: 0 10px;
+    height: 50px;
+    padding: 0px 15px;
+    outline: none;
     ::placeholder {
       padding:5px;
-
    }
 `;
 
@@ -69,8 +70,9 @@ const ModalConteiner = styled.div`
 const ButtonForm = styled.button`
 	background-color: #387fd0;
   border: none;
-  width: 60px;
+  width: auto;
   float:right;
+  padding: 0 15px;
 `;
 
 const DivButtons = styled.div`
